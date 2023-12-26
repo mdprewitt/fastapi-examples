@@ -9,11 +9,11 @@ LOG = logging.getLogger()
 app = FastAPI()
 
 
-@app.get("/hc")
-async def root():
+@app.get("/hc", status_code=200)
+async def hc():
     return {"message": "Hello World"}
 
-@app.get("/slow")
+@app.get("/slow", status_code=200)
 async def slow():
     LOG.info("Start slow")
     await asyncio.sleep(2)
@@ -25,7 +25,7 @@ async def slow():
     return {"message": "Sleepy World"}
 
 
-@app.get("/bad-slow")
+@app.get("/bad-slow", status_code=200)
 async def bad_slow():
     LOG.info("Start bad slow")
     time.sleep(10)
